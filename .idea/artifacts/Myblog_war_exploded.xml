@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Myblog" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/libs/servlet-api.jar" />
+        </element>
       </element>
     </root>
   </artifact>
