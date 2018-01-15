@@ -65,7 +65,7 @@ public class ServletRegister extends HttpServlet {
     private void createUserData(String email,String username,String password)throws IOException{
         File file=new File(USERS+"/"+username);
         file.mkdir();//建立一级目录的文件夹
-        BufferedWriter writer=new BufferedWriter(new FileWriter(file+"/profile.txt"));
+        BufferedWriter writer=new BufferedWriter(new FileWriter(file+"/profile"));
         writer.write(email+"\t"+password);
         writer.close();
     }

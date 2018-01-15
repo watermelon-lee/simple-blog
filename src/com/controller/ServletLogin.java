@@ -34,7 +34,7 @@ public class ServletLogin extends HttpServlet {
         if(name!=null&&password!=null){
             for(String filename:new File(USERS).list()){
                 if(name.equals(filename)){
-                    BufferedReader reader=new BufferedReader(new FileReader(USERS+"/"+filename+"/profile.txt"));
+                    BufferedReader reader=new BufferedReader(new FileReader(USERS+"/"+filename+"/profile"));
                     String  passwd=reader.readLine().split("\t")[1];
                     if(passwd.equals(password)){
                         return true;
@@ -43,5 +43,10 @@ public class ServletLogin extends HttpServlet {
             }
         }
         return false;
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req,resp);
     }
 }
