@@ -1,6 +1,9 @@
 package com.controller;
 
+import com.model.UserService;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,18 +13,28 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-@WebServlet(name = "ServletLogin",urlPatterns = "/login.do")
+@WebServlet(name = "ServletLogin",urlPatterns = "/login.do",initParams = {
+        @WebInitParam(name="SUCCESS_VIEW",value = "member.view"),
+        @WebInitParam(name = "ERROR_VIEW",value="index.html")})
+
+
 public class ServletLogin extends HttpServlet {
-    private final String USERS="d:out/user";
-    private final String SUCCESS_VIEW="member.view";
-    private final String ERROR_VIEW="index.html";
+    private  String SUCCESS_VIEW;
+    private  String ERROR_VIEW;
+
+    @Override
+    public void init() throws ServletException {
+        SUCCESS_VIEW=getServletConfig().getInitParameter("SUCCESS_VIEW");
+        ERROR_VIEW=getServletConfig().getInitParameter("ERROR_VIEW");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html charset:UTF-8");
         String name=request.getParameter("name");
         String password=request.getParameter("password");
-        if(CheckLogin(name,password)){
+        UserService userService=(UserService)getServletContext().getAttribute("userService");
+        if(userService.checkLogin(name,password)){
             request.getSession().setAttribute("login",name);
             request.getRequestDispatcher(SUCCESS_VIEW).forward(request,response);
         }
@@ -30,7 +43,14 @@ public class ServletLogin extends HttpServlet {
         }
     }
 
-    private boolean CheckLogin(String name,String password)throws IOException{
+    /**
+     * 将其总和到了userService
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    /*private boolean CheckLogin(String name,String password)throws IOException{
         if(name!=null&&password!=null){
             for(String filename:new File(USERS).list()){
                 if(name.equals(filename)){
@@ -43,7 +63,7 @@ public class ServletLogin extends HttpServlet {
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

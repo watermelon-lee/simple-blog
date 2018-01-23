@@ -1,6 +1,9 @@
 package com.controller;
 
+import com.model.UserService;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +12,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "ServletRegister",urlPatterns = "/register.do")
+@WebServlet(name = "ServletRegister",urlPatterns = "/register.do",initParams = {
+        @WebInitParam(name="SUCCESS_VIEW",value = "success.view"),
+        @WebInitParam(name = "ERROR_VIEW",value="error.view")})
+
 public class ServletRegister extends HttpServlet {
 
-    private String USERS="d:/out/user";
-    private String SUCCESS_VIEW="success.view";
-    private String ERROR_VIEW="error.view";
+    private String SUCCESS_VIEW;
+    private String ERROR_VIEW;
+
+    @Override
+    public void init() throws ServletException {
+        SUCCESS_VIEW=getServletConfig().getInitParameter("SUCCESS_VIEW");
+        ERROR_VIEW=getServletConfig().getInitParameter("ERROR_VIEW");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -24,7 +35,9 @@ public class ServletRegister extends HttpServlet {
         String password=request.getParameter("password");
         String confirmedPassword=request.getParameter("confirmedPassword");//获取所有参数
         List<String> errors= new ArrayList<String>();//收集出错信息
-        if(IsInValidUsername(username)){
+
+        UserService userService=(UserService)getServletContext().getAttribute("userService");
+        if(userService.isInvalidUsername(username)){
             errors.add("用户名为空或已存在");
         }
         if(IsInValidEmail(email)){
@@ -40,19 +53,24 @@ public class ServletRegister extends HttpServlet {
         }
         else{
             resultPage=SUCCESS_VIEW;
-            createUserData(email,username,password);//创建用户资料
+            userService.createUserData(email,username,password);//创建用户资料
         }
         request.getRequestDispatcher(resultPage).forward(request,response);
     }
 
-    private boolean IsInValidUsername(String username){
+    /**
+     * 将其总和到了userService
+     * @param email
+     * @return
+     */
+   /* private boolean IsInValidUsername(String username){
         for(String str:new File(USERS).list()){//检查用户资料夹是否创建来确认用户是否注册
             if(str.equals(username)){
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     private boolean IsInValidEmail(String email){
         return email==null||!email.matches("^[a-z0-9]+([.]"+"[a-z0-9]+)*@[a-z0-9]+([.][a-z0-9]+)*$");
@@ -62,12 +80,16 @@ public class ServletRegister extends HttpServlet {
         return password.length()>16||password.length()<6||password==null||!password.equals(confirmedPassword);
     }
 
-    private void createUserData(String email,String username,String password)throws IOException{
+
+    /**
+     * 综合到了userService
+     */
+    /*private void createUserData(String email,String username,String password)throws IOException{
         File file=new File(USERS+"/"+username);
         file.mkdir();//建立一级目录的文件夹
         BufferedWriter writer=new BufferedWriter(new FileWriter(file+"/profile"));
         writer.write(email+"\t"+password);
         writer.close();
-    }
+    }*/
 
 }

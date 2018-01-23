@@ -1,5 +1,7 @@
 package com.view;
 
+import com.model.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import java.util.*;
 
 @WebServlet(name = "ServletMember",urlPatterns = "/member.view")
 public class ServletMember extends HttpServlet {
+
         private final String USER = "d:out/user";
         private final String LOGIN_VIEW = "index.html";
 
@@ -39,7 +42,6 @@ public class ServletMember extends HttpServlet {
             out.println("<div class='leftPanel'>");
             out.println("<img src='images/pic1.jpg' alt='Gossip 微博' /><br><br>");
 
-            /*  实作步骤1 */
 
             out.println("<a href='logout.do?user="+name+"'>注销"+name+"</a>");
 
@@ -49,7 +51,6 @@ public class ServletMember extends HttpServlet {
             out.println("分享新鲜事...<br>");
 
 
-            /*  实作步骤2 */
 
             String blabla=request.getParameter("blabla");
             if(blabla==null){
@@ -69,7 +70,9 @@ public class ServletMember extends HttpServlet {
             out.println("</thead>");
             out.println("<tbody>");
 
-            Map<Date,String> message=readMessage(name);
+            UserService userService=(UserService)getServletContext().getAttribute("userService");
+
+            Map<Date,String> message=userService.readMessage(name);
             DateFormat dateFormat=DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.CHINA);//获取指定地区日期，时间的格式
 
             for(Date date:message.keySet()){
@@ -81,7 +84,6 @@ public class ServletMember extends HttpServlet {
                 out.println("<hr></td></tr>");
             }
 
-            /*  实作步骤3 */
 
             out.println("</tbody>");
             out.println("</table>");
@@ -92,6 +94,7 @@ public class ServletMember extends HttpServlet {
             out.close();
         }
 
+        /**
         //用以过滤.txt文件名
         private class TxtFilenameFilter implements FilenameFilter{
             @Override
@@ -128,7 +131,7 @@ public class ServletMember extends HttpServlet {
                 while((text = reader.readLine()) != null) {
                     builder.append(text);
                 }
-                Date date = new Date(Long.parseLong(txt.substring(0, txt.indexOf(".txt"))));
+                Date date = new Date(Long.parseLong(txt.substring(0, txt.indexOf(".txt"))));//文件名为发送时间
                 messages.put(date, builder.toString());
                 reader.close();
             }
@@ -136,7 +139,11 @@ public class ServletMember extends HttpServlet {
             return messages;
 
         }
-
+         *
+         * *
+         *
+         *
+         **/
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             processRequest(request, response);
         }
