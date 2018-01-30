@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.Blah;
 import com.model.UserService;
 
 import javax.servlet.ServletException;
@@ -10,19 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "ServletMessage",urlPatterns = "/message.do",initParams = {
-        @WebInitParam(name="SUCCESS_VIEW",value = "member.view"), @WebInitParam(name="ERROR_VIEW",value="member.view")})
+        @WebInitParam(name="MEMBER_VIEW",value = "member.jsp")})
 public class ServletMessage extends HttpServlet {
 
 
-    private  String SUCCESS_VIEW;
-    private  String ERROR_VIEW;
+    private  String MEMBER_VIEW;
 
     @Override
     public void init() throws ServletException {
-        SUCCESS_VIEW=getServletConfig().getInitParameter("SUCCESS_VIEW");
-        ERROR_VIEW=getServletConfig().getInitParameter("ERROR_VIEW");
+        MEMBER_VIEW=getServletConfig().getInitParameter("MEMBER_VIEW");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,21 +33,25 @@ public class ServletMessage extends HttpServlet {
             return;
         }*/
         request.setCharacterEncoding("utf-8");
+        String username=(String)request.getSession().getAttribute("login");
+        UserService userService=(UserService) getServletContext().getAttribute("userService");
+        Blah blah=new Blah();
+        blah.setUsername(username);
         String blabla=request.getParameter("blabla");
+
         if(blabla!=null&&blabla.length()!=0){
             if(blabla.length()<140){
-                String name=(String)request.getSession().getAttribute("login");
-                UserService userService=(UserService)getServletContext().getAttribute("userService");
-                userService.addMessage(name,blabla);
-                response.sendRedirect(SUCCESS_VIEW);
+                blah.setDate(new Date());
+                blah.setTxt(blabla);
+                userService.addBlah(blah);
             }
             else {
-                request.getRequestDispatcher(ERROR_VIEW).forward(request,response);
+                request.setAttribute("blabla",blabla);
             }
         }
-        else{
-            response.sendRedirect(ERROR_VIEW);
-        }
+        List<Blah> blahs = userService.getBlahs(blah);
+        request.setAttribute("blahs", blahs);
+        request.getRequestDispatcher(MEMBER_VIEW).forward(request, response);
     }
 
    /* private void addMessage(String name,String blabla)throws IOException{

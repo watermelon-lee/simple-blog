@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ServletLogout",urlPatterns = "/logout.do",initParams = {@WebInitParam(name="LOGIN_VIEW",value = "index.html")})
+@WebServlet(name = "ServletLogout",urlPatterns = "/logout.do",initParams = {@WebInitParam(name="LOGIN_VIEW",value = "index.jsp")})
 public class ServletLogout extends HttpServlet {
     private  String LOGIN_VIEW;
 

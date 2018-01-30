@@ -14,8 +14,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @WebServlet(name = "ServletLogin",urlPatterns = "/login.do",initParams = {
-        @WebInitParam(name="SUCCESS_VIEW",value = "member.view"),
-        @WebInitParam(name = "ERROR_VIEW",value="index.html")})
+        @WebInitParam(name="SUCCESS_VIEW",value = "member.jsp"),
+        @WebInitParam(name = "ERROR_VIEW",value="index.jsp")})
 
 
 public class ServletLogin extends HttpServlet {
@@ -39,7 +39,8 @@ public class ServletLogin extends HttpServlet {
             request.getRequestDispatcher(SUCCESS_VIEW).forward(request,response);
         }
         else{
-            response.sendRedirect(ERROR_VIEW);//重定位为登陆页面
+            request.setAttribute("error","名称或密码错误");
+            request.getRequestDispatcher(ERROR_VIEW).forward(request,response);
         }
     }
 

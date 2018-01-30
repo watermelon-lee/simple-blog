@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "MemberFilter",urlPatterns = {"/delete.do","/logout.do","/message.do","/member.view"},
-        initParams ={@WebInitParam(name="LOGIN_VIEW",value = "index.html")})
+@WebFilter(filterName = "MemberFilter",urlPatterns = {"/delete.do","/logout.do","/message.do","/member.jsp"},
+        initParams ={@WebInitParam(name="LOGIN_VIEW",value = "index.jsp")})
 public class MemberFilter implements Filter {
     private String LOGIN_VIEW;
     public void destroy() {
