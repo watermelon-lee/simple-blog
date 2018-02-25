@@ -1,21 +1,24 @@
-ÎÒµÄµÚÒ»¸öjavaEEÏîÄ¿£¬Ê¹ÓÃjsp&servlet¡£º®¼ÙÑ§ÍêÕâ¸ö£¬²¢ÇÒÍê³ÉÕâ¸ö¼òµ¥µÄ²©¿Í
+æˆ‘çš„ç¬¬ä¸€ä¸ªjavaEEé¡¹ç›®ï¼Œä½¿ç”¨jsp&servletã€‚å¯’å‡å­¦å®Œè¿™ä¸ªï¼Œå¹¶ä¸”å®Œæˆè¿™ä¸ªç®€å•çš„åšå®¢
 
-1-20º®¼Ù¿ªÊ¼ÁË~
+1-20å¯’å‡å¼€å§‹äº†~
 
 
-1-30 debugÁËºÃ¼¸Ìì£¬ÖÕÓÚ½â¾öÁË
-request.getRequestDispatcher£¨£©¿ÉÈ¡¾ø¶ÔÂ·¾¶Ò²¿ÉÒÔÈ¡Ïà¶ÔÂ·¾¶£¬ServletUserÖĞĞ´´íÁË¸ÄÕıÖ®ºóµÄ×Ô¼º¿´¿´
-reques.getPathInfo()£¬requrst.getServletpath£¨£©ÊÇ¸ù¾İ×Ô¼ºservletµÄurlpattern
-Èçurl Pattern£º/user/*
-·ÃÎÊ/Myblog/user/caterpillar
-getPathInfo£¨£©=/caterpillar È»ºóÓÃsubstring£¨1£©¾Í¿ÉµÃµ½caterpillar
+1-30 debugäº†å¥½å‡ å¤©ï¼Œç»ˆäºè§£å†³äº†
+request.getRequestDispatcherï¼ˆï¼‰å¯å–ç»å¯¹è·¯å¾„ä¹Ÿå¯ä»¥å–ç›¸å¯¹è·¯å¾„ï¼ŒServletUserä¸­å†™é”™äº†æ”¹æ­£ä¹‹åçš„è‡ªå·±çœ‹çœ‹
+reques.getPathInfo()ï¼Œrequrst.getServletpathï¼ˆï¼‰æ˜¯æ ¹æ®è‡ªå·±servletçš„urlpattern
+å¦‚url Patternï¼š/user/*
+è®¿é—®/Myblog/user/caterpillar
+getPathInfoï¼ˆï¼‰=/caterpillar ç„¶åç”¨substringï¼ˆ1ï¼‰å°±å¯å¾—åˆ°caterpillar
 getServletPath()=/user
-ËùÒÔ£¬ÎÒÃÇÒª»ñÈ¡Ïà¶ÔÓÚ request.getContextPath() µÄÂ·¾¶£¬ÎÒÃÇ¿ÉÒÔÊ¹ÓÃÈçÏÂµÄ´úÂë£º
+æ‰€ä»¥ï¼Œæˆ‘ä»¬è¦è·å–ç›¸å¯¹äº request.getContextPath() çš„è·¯å¾„ï¼Œæˆ‘ä»¬å¯ä»¥ä½¿ç”¨å¦‚ä¸‹çš„ä»£ç ï¼š
 String uri = request.getServletPath();
 String pathInfo = request.getPathInfo();
 if (pathInfo != null && pathInfo.length() > 0) {
     uri = uri + pathInfo;
 }
-servletConfigÒÔ¼°servletContext
-ÔÚjspÖĞÒş²Ø¶ÔÏóapplication¶ÔÓ¦ServletContext£¬config¶ÔÓ¦servletConfig
-Ê¹ÓÃjavabeanÅäºÏEL±êÇ© ÒÔ¼°JSTL±êÇ© ¼õÉÙjspÒ³ÃæÖĞ<%%>Ê¹ÓÃ
+servletConfigä»¥åŠservletContext
+åœ¨jspä¸­éšè—å¯¹è±¡applicationå¯¹åº”ServletContextï¼Œconfigå¯¹åº”servletConfig
+ä½¿ç”¨javabeané…åˆELæ ‡ç­¾ ä»¥åŠJSTLæ ‡ç­¾ å‡å°‘jspé¡µé¢ä¸­<%%>ä½¿ç”¨
+
+
+2-25å¼€å­¦äº†QAQ Â å¯’å‡åæ¥è¿˜æ˜¯æ²¡æœ‰å¥½å¥½å­¦ä¹ ï¼Œå¼€å­¦åŠ æ²¹å§ï¼ï¼
