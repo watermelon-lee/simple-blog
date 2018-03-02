@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.Account;
 import com.model.Blah;
 import com.model.UserService;
 
@@ -30,7 +31,9 @@ public class ServletUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService userService = (UserService) getServletContext().getAttribute("userService");
         String username = request.getPathInfo().substring(1);
-        if (userService.isUserExisted(username)) {
+        Account account=new Account();
+        account.setName(username);
+        if (userService.isUserExisted(account)) {
             Blah blah = new Blah();
             blah.setUsername(username);
             List<Blah> blahs = userService.getBlahs(blah);

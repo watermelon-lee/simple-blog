@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.Account;
 import com.model.UserService;
 
 import javax.servlet.ServletException;
@@ -37,14 +38,17 @@ public class ServletRegister extends HttpServlet {
         List<String> errors= new ArrayList<String>();//收集出错信息
 
         UserService userService=(UserService)getServletContext().getAttribute("userService");
-        if(userService.isInvalidUsername(username)){
-            errors.add("用户名为空或已存在");
-        }
+
         if(IsInValidEmail(email)){
             errors.add("未填写邮件或邮件格式不正确");
         }
         if(IsInValidPassword(password,confirmedPassword)){
             errors.add("确认符合密码格式并重新确认密码");
+        }
+
+        Account account=new Account(username,password,email);
+        if(userService.isUserExisted(account)){
+            errors.add("用户名为空或已存在");
         }
 
         String resultPage=ERROR_VIEW;
@@ -53,7 +57,7 @@ public class ServletRegister extends HttpServlet {
         }
         else{
             resultPage=SUCCESS_VIEW;
-            userService.createUserData(email,username,password);//创建用户资料
+            userService.add(account);//创建用户资料
         }
         request.getRequestDispatcher(resultPage).forward(request,response);
     }

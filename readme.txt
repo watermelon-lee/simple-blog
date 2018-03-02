@@ -19,3 +19,11 @@ if (pathInfo != null && pathInfo.length() > 0) {
 servletConfig以及servletContext
 在jsp中隐藏对象application对应ServletContext，config对应servletConfig
 使用javabean配合EL标签 以及JSTL标签 减少jsp页面中<%%>使用
+
+
+2-25开学了QAQ  寒假后来还是没有好好学习，开学加油吧！！
+
+
+3-2 参照书本基本完成了这个小demo  使用jsp+servlet+javabean  数据库使用的mysql  
+
+下一个计划：简略的学习一些前端知识(看一下JQuary), 然后独立完成一个更为复杂美观的小项目，之后就像Spring出发>!<  三个星期完成！！！

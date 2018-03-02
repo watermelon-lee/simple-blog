@@ -1,7 +1,12 @@
 package com.web;
 
+import com.model.AccountDAOjdbcImpl;
+import com.model.BlahDAOjdbcImpl;
 import com.model.UserService;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -10,6 +15,8 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSessionBindingEvent;
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 @WebListener()
 public class GossipListener implements ServletContextListener,
@@ -27,9 +34,15 @@ public class GossipListener implements ServletContextListener,
          initialized(when the Web application is deployed). 
          You can initialize servlet context related data here.
       */
-        ServletContext context=sce.getServletContext();
-        String USERS=sce.getServletContext().getInitParameter("USERS");
-        context.setAttribute("userService",new UserService(USERS));
+        try{
+            Context initContext=new InitialContext();
+            Context envContext= (Context)initContext.lookup("java:/comp/env");
+            DataSource dataSource=(DataSource) envContext.lookup("jdbc/gossip");
+            ServletContext context=sce.getServletContext();
+            context.setAttribute("userService",new UserService(new AccountDAOjdbcImpl(dataSource),new BlahDAOjdbcImpl(dataSource)));
+        }catch (NamingException ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

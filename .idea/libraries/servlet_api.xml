@@ -2,9 +2,11 @@
   <library name="servlet-api">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/libs/servlet-api.jar!/" />
+      <root url="file://$PROJECT_DIR$/web/WEB-INF/libs" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/web/WEB-INF/libs" recursive="false" />
     <jarDirectory url="jar://$PROJECT_DIR$/web/WEB-INF/libs/servlet-api.jar!/" recursive="false" />
   </library>
 </component>

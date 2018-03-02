@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: wade
@@ -23,9 +25,28 @@
         <li>分享讯息也可以
         <li>随意写写表心情
     </ul>
+    <table style="text-align: left; width: 510px;height: 88px;" border="0" cellpadding="2" cellspacing="2">
+        <thead>
+        <tr>
+            <th><hr></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="blah" items="${applicationScope.userService.newest}">
+            <tr>
+                <td style="vertical-align: top">
+                    ${blah.username}<br>
+                    <c:out value="${blah.txt}"/><br>
+                    <fmt:formatDate value="${blah.date}" type="both" dateStyle="full" timeStyle="full"/>
+                    <hr>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 <div>
-    <a href='register.jsp'>还不是会员？</a>
+
     <p>
     <form method='post' action='/Myblog/login.do'>
         <div style="color: dodgerblue ">${requestScope.error}</div><br>
@@ -44,7 +65,8 @@
                 <td colspan='2' align='center'><input type='submit' value='登入'></td>
             </tr>
             <tr>
-                <td colspan='2'><a href='forgot.html'>忘记密码？</a>
+                <td colspan='2'><a href='forgot.html'>忘记密码？</a> <br>
+                    <a href='register.jsp'>还不是会员？</a>
                 </td>
             </tr>
         </table>

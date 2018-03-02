@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.Account;
 import com.model.UserService;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,10 @@ public class ServletLogin extends HttpServlet {
         String name=request.getParameter("name");
         String password=request.getParameter("password");
         UserService userService=(UserService)getServletContext().getAttribute("userService");
-        if(userService.checkLogin(name,password)){
+        Account account=new Account();
+        account.setName(name);
+        account.setPassword(password);
+        if(userService.checkLogin(account)){
             request.getSession().setAttribute("login",name);
             request.getRequestDispatcher(SUCCESS_VIEW).forward(request,response);
         }

@@ -9,6 +9,9 @@
         </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/libs/servlet-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/libs/jstl-1.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/libs/commons-lang.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/libs/mysql-connector-java-5.1.18-bin.jar" />
         </element>
       </element>
     </root>
