@@ -1,29 +1,30 @@
-ÎÒµÄµÚÒ»¸öjavaEEÏîÄ¿£¬Ê¹ÓÃjsp&servlet¡£º®¼ÙÑ§ÍêÕâ¸ö£¬²¢ÇÒÍê³ÉÕâ¸ö¼òµ¥µÄ²©¿Í
+æˆ‘çš„ç¬¬ä¸€ä¸ªjavaEEé¡¹ç›®ï¼Œä½¿ç”¨jsp&servletã€‚å¯’å‡å­¦å®Œè¿™ä¸ªï¼Œå¹¶ä¸”å®Œæˆè¿™ä¸ªç®€å•çš„åšå®¢
 
-1-20º®¼Ù¿ªÊ¼ÁË~
+1-20å¯’å‡å¼€å§‹äº†~
 
 
-1-30 debugÁËºÃ¼¸Ìì£¬ÖÕÓÚ½â¾öÁË
-request.getRequestDispatcher£¨£©¿ÉÈ¡¾ø¶ÔÂ·¾¶Ò²¿ÉÒÔÈ¡Ïà¶ÔÂ·¾¶£¬ServletUserÖĞĞ´´íÁË¸ÄÕıÖ®ºóµÄ×Ô¼º¿´¿´
-reques.getPathInfo()£¬requrst.getServletpath£¨£©ÊÇ¸ù¾İ×Ô¼ºservletµÄurlpattern
-Èçurl Pattern£º/user/*
-·ÃÎÊ/Myblog/user/caterpillar
-getPathInfo£¨£©=/caterpillar È»ºóÓÃsubstring£¨1£©¾Í¿ÉµÃµ½caterpillar
+1-30 debugäº†å¥½å‡ å¤©ï¼Œç»ˆäºè§£å†³äº†
+request.getRequestDispatcherï¼ˆï¼‰å¯å–ç»å¯¹è·¯å¾„ä¹Ÿå¯ä»¥å–ç›¸å¯¹è·¯å¾„ï¼ŒServletUserä¸­å†™é”™äº†æ”¹æ­£ä¹‹åçš„è‡ªå·±çœ‹çœ‹
+reques.getPathInfo()ï¼Œrequrst.getServletpathï¼ˆï¼‰æ˜¯æ ¹æ®è‡ªå·±servletçš„urlpattern
+å¦‚url Patternï¼š/user/*
+è®¿é—®/Myblog/user/caterpillar
+getPathInfoï¼ˆï¼‰=/caterpillar ç„¶åç”¨substringï¼ˆ1ï¼‰å°±å¯å¾—åˆ°caterpillar
 getServletPath()=/user
-ËùÒÔ£¬ÎÒÃÇÒª»ñÈ¡Ïà¶ÔÓÚ request.getContextPath() µÄÂ·¾¶£¬ÎÒÃÇ¿ÉÒÔÊ¹ÓÃÈçÏÂµÄ´úÂë£º
+æ‰€ä»¥ï¼Œæˆ‘ä»¬è¦è·å–ç›¸å¯¹äº request.getContextPath() çš„è·¯å¾„ï¼Œæˆ‘ä»¬å¯ä»¥ä½¿ç”¨å¦‚ä¸‹çš„ä»£ç ï¼š
 String uri = request.getServletPath();
 String pathInfo = request.getPathInfo();
 if (pathInfo != null && pathInfo.length() > 0) {
     uri = uri + pathInfo;
 }
-servletConfigÒÔ¼°servletContext
-ÔÚjspÖĞÒş²Ø¶ÔÏóapplication¶ÔÓ¦ServletContext£¬config¶ÔÓ¦servletConfig
-Ê¹ÓÃjavabeanÅäºÏEL±êÇ© ÒÔ¼°JSTL±êÇ© ¼õÉÙjspÒ³ÃæÖĞ<%%>Ê¹ÓÃ
+servletConfigä»¥åŠservletContext
+åœ¨jspä¸­éšè—å¯¹è±¡applicationå¯¹åº”ServletContextï¼Œconfigå¯¹åº”servletConfig
+ä½¿ç”¨javabeané…åˆELæ ‡ç­¾ ä»¥åŠJSTLæ ‡ç­¾ å‡å°‘jspé¡µé¢ä¸­<%%>ä½¿ç”¨
 
 
-2-25¿ªÑ§ÁËQAQ  º®¼ÙºóÀ´»¹ÊÇÃ»ÓĞºÃºÃÑ§Ï°£¬¿ªÑ§¼ÓÓÍ°É£¡£¡
+2-25å¼€å­¦äº†QAQ  å¯’å‡åæ¥è¿˜æ˜¯æ²¡æœ‰å¥½å¥½å­¦ä¹ ï¼Œå¼€å­¦åŠ æ²¹å§ï¼ï¼
 
 
-3-2 ²ÎÕÕÊé±¾»ù±¾Íê³ÉÁËÕâ¸öĞ¡demo  Ê¹ÓÃjsp+servlet+javabean  Êı¾İ¿âÊ¹ÓÃµÄmysql  
+3-2 åŸºæœ¬å®Œæˆäº†è¿™ä¸ªå°demo  ä½¿ç”¨jsp+servlet+javabean  æ•°æ®åº“ä½¿ç”¨çš„mysql  
+é¡¹ç›®éƒ¨ç½²åœ¨äº†è‡ªå·±çš„æœåŠ¡å™¨ä¸Šhttp://39.107.93.107:8080/Myblog/    
 
-ÏÂÒ»¸ö¼Æ»®£º¼òÂÔµÄÑ§Ï°Ò»Ğ©Ç°¶ËÖªÊ¶(¿´Ò»ÏÂJQuary), È»ºó¶ÀÁ¢Íê³ÉÒ»¸ö¸üÎª¸´ÔÓÃÀ¹ÛµÄĞ¡ÏîÄ¿£¬Ö®ºó¾ÍÏñSpring³ö·¢>!<  Èı¸öĞÇÆÚÍê³É£¡£¡£¡
+ä¸‹ä¸€ä¸ªè®¡åˆ’ï¼šç®€ç•¥çš„å­¦ä¹ ä¸€äº›å‰ç«¯çŸ¥è¯†(çœ‹ä¸€ä¸‹JQuary), ç„¶åç‹¬ç«‹å®Œæˆä¸€ä¸ªæ›´ä¸ºå¤æ‚ç¾è§‚çš„å°é¡¹ç›®ï¼Œä¹‹åå°±åƒSpringå‡ºå‘>!<  ä¸‰ä¸ªæ˜ŸæœŸå®Œæˆï¼ï¼ï¼
